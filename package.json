@@ -1,0 +1,16 @@
+{
+  "name": "tdd-seguridad",
+  "version": "1.0.0",
+  "description": "Proyecto ejemplo para uso de TDD",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Rodrigo Montemayor",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "mocha": "^8.1.3"
+  }
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- latest -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="site.css">
+
+    <title>Security</title>
+  </head>
+  <body>
+    <div class="background"></div>
+
+    <div class="container body-content">
+      <div class="login-container">
+        <div class="nes-container with-title is-dark">
+            <p class="title">Ingresa tu nueva contrase&ntilde;a</p>
+    
+            <div class="nes-field" style="margin-top: 20px;">
+                <label for="password">Contrase&ntilde;a</label>
+                <input type="text" id="password" class="nes-input is-dark">
+                <span class="nes-text is-error" style="display:none">Contrase&ntilde;a inv&aacute;lida</span>
+            </div>
+    
+            <div style="text-align: right">
+                <button type="button" class="nes-btn is-primary" style="margin-top: 20px;" onclick="validatePassword()">Guardar</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script src="moderinzr.js"></script>
+
+    <script type="text/javascript">
+  
+      function validatePassword() {
+          $(".nes-text.is-error").hide();
+          $(".nes-input").removeClass("is-error").removeClass("is-success");
+          $.post('/api/security/validate-password', {password: $("#password").val()}, function (response) {
+              if (response) {
+                  $(".nes-input").addClass("is-success");
+              } else {
+                  $(".nes-input").addClass("is-error");
+                  $(".nes-text.is-error").show();
+              }
+          });
+      }
+
+      $("#password").on('keyup', function (e) {
+          if (e.key === 'Enter' || e.keyCode === 13) {
+              validatePassword();
+          }
+      });
+
+
+  </script>
+  </body>
+</html>
